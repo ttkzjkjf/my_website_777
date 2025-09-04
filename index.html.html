@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>История Интернета — Улучшенный Интерактивный Сайт</title>
+<style>
+    /* Reset */
+    * {
+        margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fafafa;
+        color: #222;
+        line-height: 1.6;
+        min-height: 100vh;
+        transition: background-color 0.5s, color 0.5s;
+        padding-bottom: 100px;
+    }
+    body.dark-theme {
+        background-color: #111;
+        color: #eee;
+    }
+    /* Container */
+    .container {
+        max-width: 1400px;
+        margin: auto;
+        padding: 20px 15px;
+    }
+    h1, h2, h3 {
+        color: #004aad;
+        text-shadow: 0 2px 8px rgba(0, 74, 173,0.3);
+        margin-bottom: 15px;
+        transition: color 0.4s;
+    }
+    body.dark-theme h1, body.dark-theme h2, body.dark-theme h3 {
+        color: #33aaff;
+        text-shadow: 0 2px 6px rgba(51, 170, 255,0.6);
+    }
+    p {
+        margin-bottom: 18px;
+        font-size: 1.1em;
+    }
+    a {
+        color: #0056b3;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+        color: #ff7300;
+        text-decoration: underline;
+    }
+    ul, ol {
+        margin-left: 25px;
+        margin-bottom: 20px;
+    }
+
+    /* Header with enhanced animations */
+    header {
+        background: linear-gradient(135deg, #2d6cdf, #58a0ff, #a0c4ff);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(45, 108, 223, 0.6);
+        border-radius: 0 0 40px 40px;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+    }
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+        animation: twinkle 8s infinite;
+    }
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.1; }
+        50% { opacity: 0.5; }
+    }
+    header h1 {
+        font-size: 3.5rem;
+        animation: fadeScaleIn 1.8s ease forwards, pulseText 3s infinite alternate;
+    }
+    header p {
+        max-width: 1000px;
+        margin: 20px auto 0;
+        font-size: 1.4rem;
+        line-height: 1.7;
+        animation: fadeInUp 2.2s ease forwards;
+    }
+    @keyframes fadeScaleIn {
+        from {opacity: 0; transform: scale(0.8);}
+        to {opacity:1; transform: scale(1);}
+    }
+    @keyframes fadeInUp {
+        from {opacity:0; transform: translateY(20px);}
+        to {opacity:1; transform: translateY(0);}
+    }
+    @keyframes pulseText {
+        from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        to { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+    }
+
+    /* Enhanced Nav with more interactivity */
+    nav {
+        background: #004aad;
+        padding: 15px 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        user-select: none;
+        transition: box-shadow 0.4s;
+    }
+    nav:hover {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    }
+    nav a {
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0 12px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        transition: background 0.4s, color 0.4s, transform 0.2s, box-shadow 0.4s;
+        position: relative;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 8px rgba(255, 107, 0, 0);
+        animation: buttonGlow 5s infinite alternate;
+    }
+    @keyframes buttonGlow {
+        from { box-shadow: 0 2px 8px rgba(255, 107, 0, 0.2); }
+        to { box-shadow: 0 2px 8px rgba(255, 107, 0, 0.5); }
+    }
+    nav a::before {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        bottom: 8px;
+        left: 50%;
+        background: linear-gradient(90deg, #ff9800, #ff3b00);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    nav a:hover, nav a:focus {
+        background: #ff6b00;
+        color: white;
+        box-shadow: 0 4px 16px #ff6b00aa, 0 0 20px #ff6b0044;
+        transform: translateY(-5px) rotate(1deg);
+        animation: wobble 0.5s ease;
+    }
+    @keyframes wobble {
+        0%, 100% { transform: translateY(-5px) rotate(0deg); }
+        25% { transform: translateY(-5px) rotate(1deg); }
+        75% { transform: translateY(-5px) rotate(-1deg); }
+    }
+    nav a:hover::before, nav a:focus::before {
+        width: 70%;
+        left: 50%;
+    }
+    body.dark-theme nav {
+        background: #112233;
+        box-shadow: 0 2px 12px rgba(51, 136, 255, 0.8);
+    }
+    body.dark-theme nav a:hover {
+        background: #33aaff;
+        box-shadow: 0 4px 14px #33aaffcc, 0 0 20px #33aaff44;
+    }
+
+    /* New toggle theme button near nav */
+    .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #333, #666);
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8em;
+        color: white;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        z-index: 1001;
+    }
+    .theme-toggle:hover {
+        transform: scale(1.15) rotate(360deg);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+    .theme-toggle:active {
+        transform: scale(1.05);
+    }
+
+    /* Section styles with more interactive elements */
+    section {
+        background: white;
+        margin: 35px 0;
+        padding: 35px 40px;
+        border-radius: 18px;
+        box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+        line-height: 1.65;
+        animation: slideInUp 1.2s ease forwards;
+        transition: box-shadow 0.4s ease;
+    }
+    section:hover {
+        box-shadow: 0 15px 35px rgba(0,105,217,0.2);
+    }
+    body.dark-theme section {
+        background: #222c3b;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    }
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Enhanced Buttons with plethora of types */
+
+    /* Primary button with advanced effects */
+    .btn-primary {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        font-size: 1.15rem;
+        font-weight: 700;
+        border-radius: 40px;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 8px 20px rgba(52,152,219,0.4);
+        transition: all 0.4s ease;
+        display: inline-block;
+        margin-right: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
+        position: relative;
+        overflow: hidden;
+        z-index: 0;
+        animation: breathe 4s infinite alternate;
+    }
+    @keyframes breathe {
+        from { box-shadow: 0 8px 20px rgba(52,152,219,0.4); }
+        to { box-shadow: 0 12px 30px rgba(52,152,219,0.7); }
+    }
+    .btn-primary:before {
+        content: "";
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, #fffc00 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.7s ease;
+        pointer-events: none;
+        z-index: -1;
+    }
+    .btn-primary:hover {
+        transform: scale(1.08) translateY(-3px) rotateY(15deg);
+        box-shadow: 0 14px 40px rgba(52,152,219,0.7);
+    }
+    .btn-primary:hover:before {
+        opacity: 0.3;
+    }
+    .btn-primary:active {
+        transform: scale(0.95);
+        box-shadow: 0 6px 15px rgba(52,152,219,0.3);
+    }
+
+    /* Gradient shifting button */
+    .btn-gradient {
+        background: linear-gradient(270deg, #ff512f, #dd2476, #ff512f);
+        background-size: 600% 600%;
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-radius: 36px;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 6px 18px rgba(221,36,118,.6);
+        transition: transform 0.3s ease;
+        margin: 10px 15px 10px 0;
+        animation: gradientShift 9s ease infinite;
+    }
+    .btn-gradient:hover {
+        transform: scale(1.15) translateY(-5px) perspective(100px) rotateX(10deg);
+        box-shadow: 0 10px 30px rgba(221,36,118,0.9);
+    }
+    .btn-gradient:active {
+        transform: scale(0.95);
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%;}
+        50% { background-position: 100% 50%;}
+        100% { background-position: 0% 50%;}
+    }
+
+    /* Ripple effect button */
+    .btn-ripple {
+        background: #00bfa5;
+        border-radius: 14px;
+        padding: 14px 25px;
+        font-size: 1rem;
+        color: white;
+        font-weight: 600;
+        user-select: none;
+        border: none;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 10px 15px 10px 0;
+        box-shadow: 0 6px 15px rgba(0,191,165,0.5);
+        animation: colorShift 6s infinite alternate;
+    }
+    @keyframes colorShift {
+        from { background: #00bfa5; }
+        to { background: #00e665; }
+    }
+    .btn-ripple:hover {
+        background-color: #009e8f;
+        box-shadow: 0 12px 26px rgba(0,191,165,0.7);
+        transform: translateX(5px);
+    }
+    .btn-ripple:active {
+        background-color: #007961;
+    }
+    .btn-ripple span.ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        animation: rippleEffect 0.6s linear;
+        transform: scale(0);
+        pointer-events: none;
+        z-index: 10;
+        will-change: transform, opacity;
+    }
+    @keyframes rippleEffect {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    /* Pulsating button for calls to action */
+    .btn-pulse {
+        background: #ff5722;
+        border: none;
+        padding: 18px 30px;
+        font-size: 1.2rem;
+        color: white;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 8px 20px rgba(255,87,34,0.6);
+        transition: all 0.5s ease;
+        margin: 10px 15px 10px 0;
+        animation: pulsate 2s infinite;
+    }
+    @keyframes pulsate {
+        0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(255,87,34,0.6); }
+        50% { transform: scale(1.05); box-shadow: 0 12px 30px rgba(255,87,34,0.9); }
+    }
+    .btn-pulse:hover {
+        animation: none;
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 15px 35px rgba(255,87,34,1);
+    }
+    .btn-pulse:active {
+        transform: scale(0.9);
+    }
+
+    /* Link-style button with underline animation */
+    .btn-link {
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #ea580c;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.4s, transform 0.4s;
+        cursor: pointer;
+        padding-bottom: 3px;
+        user-select: none;
+        position: relative;
+    }
+    .btn-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(90deg, #ea580c, #ff3b00);
+        transition: width 0.4s ease;
+    }
+    .btn-link:hover {
+        border-color: #ea580c;
+        transform: scale(1.05);
+        color: #d1470a;
+    }
+    .btn-link:hover::after {
+        width: 100%;
+    }
+
+    /* New button: Bouncy download-style */
+    .btn-bounce {
+        background: #9c27b0;
+        border: none;
+        padding: 15px 26px;
+        font-size: 1.05rem;
+        color: white;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        user-select: none;
+        box-shadow: 0 6px 15px rgba(156,39,176,0.6);
+        transition: transform 0.3s ease;
+        margin: 10px 15px 10px 0;
+        animation: bounceIn 1s ease forwards, bounce 3s infinite 1s;
+    }
+    @keyframes bounceIn {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-10px); }
+        60% { transform: translateY(-5px); }
+    }
+    .btn-bounce:hover {
+        transform: scale(1.08) translateY(-5px);
+        box-shadow: 0 10px 25px rgba(156,39,176,0.9);
+    }
+    .btn-bounce:active {
+        transform: scale(0.95);
+    }
+
+    /* Card enhancements */
+    .card {
+        background-color: #ffffffcc;
+        padding: 20px 25px;
+        border-radius: 16px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+        transition: box-shadow 0.4s ease, transform 0.3s ease;
+        cursor: default;
+        user-select: none;
+        animation: cardPulse 4s infinite alternate;
+    }
+    @keyframes cardPulse {
+        from { box-shadow: 0 12px 35px rgba(0,0,0,0.05); }
+        to { box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+    }
+    .card:hover {
+        box-shadow: 0 20px 55px rgba(34, 110, 250, 0.18);
+        transform: translateY(-10px) rotateY(5deg);
+    }
+    body.dark-theme .card {
+        background-color: #1f2a40cc;
+        box-shadow: 0 12px 35px rgba(17, 32, 60, 0.8);
+    }
+    body.dark-theme .card:hover {
+        box-shadow: 0 20px 55px rgba(51, 136, 255, 0.7);
+    }
+
+    /* Images with more interactivity */
+    img {
+        max-width: 100%;
+        border-radius: 20px;
+        margin: 25px 0;
+        cursor: zoom-in;
+        box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: imageFloat 6s ease infinite alternate;
+    }
+    @keyframes imageFloat {
+        from { transform: translateY(0); }
+        to { transform: translateY(-5px); }
+    }
+    img:hover {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+    }
+    
+    /* Tooltip */
+    .tooltip {
+        position: relative;
+        cursor: help;
+        border-bottom: 1px dotted #ea580c;
+    }
+    .tooltip:hover::after {
+        content: attr(data-tip);
+        position: absolute;
+        background: #ff9100cc;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        opacity: 1;
+        pointer-events: none;
+        z-index: 9999;
+        transition: opacity 0.2s ease;
+    }
+    .tooltip::after {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Tabs */
+    .tabs {
+      max-width: 100%;
+      margin: 30px auto 20px auto;
+    }
+    .tab-buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .tab-button {
+        background: #0056b3;
+        border: none;
+        padding: 12px 26px;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 26px;
+        box-shadow: 0 6px 15px rgba(0,86,179,0.4);
+        transition: background-color 0.3s;
+        user-select: none;
+        animation: tabPulse 4s infinite alternate;
+    }
+    @keyframes tabPulse {
+        from { box-shadow: 0 6px 15px rgba(0,86,179,0.4); }
+        to { box-shadow: 0 8px 20px rgba(0,86,179,0.6); }
+    }
+    .tab-button:hover {
+        background: #ff6b00;
+        box-shadow: 0 8px 22px #ff751a;
+        transform: translateY(-3px);
+    }
+    .tab-button.active {
+        background: #ff6b00;
+        box-shadow: 0 8px 22px #ff751a;
+    }
+    .tab-content {
+        background-color: white;
+        padding: 25px 30px;
+        border-radius: 18px;
+        box-shadow: 0 14px 45px rgba(0,0,0,0.07);
+        max-height: 550px;
+        overflow-y: auto;
+    }
+    body.dark-theme .tab-content {
+        background-color: #1a2336;
+        box-shadow: 0 14px 40px rgba(33, 110, 255, 0.7);
+    }
+
+    /* Modal enhancements */
+    .modal-background {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(0, 0, 0, 0.54);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        user-select: none;
+    }
+    .modal-background.active {
+        display: flex;
+        animation: fadeInModal 0.3s ease forwards;
+    }
+    @keyframes fadeInModal {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    .modal {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px 40px;
+        max-width: 700px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 24px 50px rgba(0,0,0,0.2);
+        position: relative;
+        user-select: text;
+        animation: modalZoom 0.4s ease;
+    }
+    @keyframes modalZoom {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    body.dark-theme .modal {
+        background: #202a44;
+        box-shadow: 0 28px 60px rgba(33,110,255,0.7);
+        color: #ddd;
+    }
+    .modal h2 {
+        margin-bottom: 12px;
+    }
+    .modal-close {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        cursor: pointer;
+        font-size: 28px;
+        font-weight: 700;
+        color: #555;
+        transition: color 0.3s ease;
+        user-select: none;
+    }
+    .modal-close:hover {
+        color: #ff6b00;
+        transform: rotate(90deg);
+    }
+    body.dark-theme .modal-close:hover {
+        color: #ffaa55;
+    }
+
+    /* Comment form enhancements */
+    #comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 700px;
+        margin: 20px auto 0 auto;
+    }
+    #comment-form input,
+    #comment-form textarea {
+        padding: 14px 18px;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: 2px solid #ddd;
+        transition: border-color 0.3s;
+        resize: vertical;
+        font-family: inherit;
+        user-select: auto;
+        animation: inputGlow 3s infinite alternate;
+    }
+    @keyframes inputGlow {
+        from { border-color: #ddd; }
+        to { border-color: #0056b3; box-shadow: 0 0 5px rgba(0,86,179,0.3); }
+    }
+    #comment-form input:focus,
+    #comment-form textarea:focus {
+        outline: none;
+        border-color: #0056b3;
+        box-shadow: 0 0 10px #3399ff88;
+    }
+    body.dark-theme #comment-form input,
+    body.dark-theme #comment-form textarea {
+        background-color: #1a2335;
+        color: #ddd;
+        border-color: #445577;
+    }
+    body.dark-theme #comment-form input:focus,
+    body.dark-theme #comment-form textarea:focus {
+        border-color: #3399ff;
+        box-shadow: 0 0 10px #3399ff55;
+    }
+
+    /* Progress bar for page scroll */
+    .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #ff6b00, #ff3b00);
+        z-index: 1000;
+        transform: scaleX(0);
+        transform-origin: 0 0;
+        transition: transform 0.1s ease;
+    }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="theme-toggle" id="themeToggle">🌙</div>
+<header>
+    <h1>История Интернета</h1>
+    <p>От первых экспериментов к глобальной сети: путешествие внутрь эволюции цифрового мира, где каждый бит данных изменил наше понимание коммуникации, информации и будущего.</p>
+</header>
+
+<nav>
+    <a href="#intro">Введение</a>
+    <a href="#history">История</a>
+    <a href="#keyfigures">Ключевые фигуры</a>
+    <a href="#future">Будущее</a>
+    <a href="#statistics">Статистика</a>
+    <a href="#comments">Комментарии</a>
+</nav>
+
+<div class="container">
+<section id="intro">
+    <h2>Введение в Мир Интернета</h2>
+    <p>Интернет, как мы его знаем, стоит на плечах гигантов научного прогресса. Это не просто сеть компьютеров, а сложная экосистема, которая связывает миллиарды устройств по всему миру. В этом введении мы разберем основы: от базовых протоколов до современных стандартов, которые делают интернет надежным и быстрым инструментом для коммуникации, работал и производства. Эксперты, такие как Вутима Керрьер, называют интернет "величайшим изобретением человечества", потому что он решает проблемы масштабирования в реальном времени.</p>
+    <p>Чтобы понять интернет, нужно вспомнить о его предшественниках. Первая сеть ARPANET, созданная в 1969 году Министерством Обороны США, была всего лишь шагом к глобальной сети. Но именно благодаря разработке TCP/IP в 1970-х интернет стал тем, чем он является сейчас. Без этих протоколов, позволяющих надежную передачу данных, сайт, который вы просматриваете, не существовал бы.</p>
+    <div class="card">
+        <h3>Почему Интернет Важен?</h3>
+        <ul>
+            <li>Доступ к информации в любой точке мира за секунды.</li>
+            <li>Связь между людьми через океаны без задержек.</li>
+            <li>Экономический рост: миллиарды долларов генерируются из онлайн-бизнеса ежегодно.</li>
+            <li>Инновации: от облачных вычислений до ИИ, все основано на интернет-инфраструктуре.</li>
+        </ul>
+    </div>
+    <button class="btn-primary" onclick="openModal('introModal')">Узнать Больше</button>
+</section>
+
+<section id="history">
+    <h2>История Интернета</h2>
+    <p>История интернета — это эпос инноваций, где каждый decade приносил революционные изменения. В 1969 году запуск ARPANET стал началом: небольшой сети из четырех компьютеров в Калифорнийском университете. Этот проект, финансируемый ВВС США, имел цель создания устойчивой коммуникации в случае ядерной войны. "ARPANET показал, что сети могут быть жизненно важными для безопасности," говорит историк технологии Джон Кертис.</p>
+    <p>К 1970-м годы пришел протокол TCP/IP, разработанный Робертом Брэдли и Винтоном Черфом, который позволил сетям "разговаривать" друг с другом. Это было прорывом: интернет больше не был изолированными островами, а стал единой глобальной системой. В 1980-х года Тим Бернерс-Ли изобрел World Wide Web, добавив гипертекст и браузеры. Это сделало интернет доступным для обычных пользователей, а не только ученых.</p>
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="openTab(event, 'tab1')">1960-е: Начало</button>
+            <button class="tab-button" onclick="openTab(event, 'tab2')">1970-е: Протоколы</button>
+            <button class="tab-button" onclick="openTab(event, 'tab3')">1980-е: WWW</button>
+            <button class="tab-button" onclick="openTab(event, 'tab4')">1990-е: Интернет-Бум</button>
+        </div>
+        <div id="tab1" class="tab-content">
+            <h3>1960-е: Начало Эры</h3>
+            <p>В 1969 году был запущен ARPANET, прототип сети для военных целей. Это был период холодной войны, и сети виделись как способ поддержания коммуникации после катастрофы. Проект возглавлял Ларри Робертс, который позже получит награду за вклад в интернет.</p>
+        </div>
+        <div id="tab2" class="tab-content" style="display: none;">
+            <h3>1970-е: Разработка Протоколов</h3>
+            <p>TCP/IP был разработан для интеграции сетей. Это позволило email, файловий обмен и ранний чат. Команда во главе с Винтоном Черфом работала над стандартами, которые теперь используются во всем мире.</p>
+        </div>
+        <div id="tab3" class="tab-content" style="display: none;">
+            <h3>1980-е: Возникновение WWW</h3>
+            <p>Тим Бернерс-Ли создал WWW в CERN. Это включало HTTP, HTML и первые браузеры. Интернет стал визуальным и интерактивным, открыв двери для миллионов пользователей. К 1989 году сеть расширилась до тысяч узлов.</p>
+        </div>
+        <div id="tab4" class="tab-content" style="display: none;">
+            <h3>1990-е: Интернет-Бум</h3>
+            <p>1990-е принесли AOL, Netscape Navigator и dot-com bubble. Миллиарды долларов инвестировались в онлайн-компании. Это было время, когда интернет перешел из академической среды в повседневную жизнь каждого.</p>
+        </div>
+    </div>
+    <button class="btn-gradient">Подробнее о Эпохах</button>
+</section>
+
+<section id="keyfigures">
+    <h2>Ключевые Фигуры Развития Интернета</h2>
+    <p>Без этих пионеров интернет оставался бы теоретической концепцией. Каждая личность внесла уникальный вклад: от военных протоколов до открытых стандартов, которые сделали сеть доступной для всех. Винт Серф и Боб Кан изобрели TCP/IP, без которого современный интернет невозможен. Ала Горес и Джон Постел развивали DNS, ключевой слой адресации.</p>
+    <div class="card">
+        <h3>Винтон Серф: Отец Интернета</h3>
+        <p>Серф, получивший Нобелевскую премию аналог в 2015 году, разработал протоколы для надежной передачи данных. Его работа над IPv6 продолжает влиять на будущие сети. "Интернет — это всего лишь средство, а не цель," — говорит он в интервью.</p>
+    </div>
+    <div class="card">
+        <h3>Тим Бернерс-Ли: Создатель WWW</h3>
+        <p>Бернерс-Ли предложил гипертекст в 1989 году, что революционизировало доступ к информации. Он основал W3C для стандартизации веба. Его миссия — держать интернет открытым и свободным.</p>
+    </div>
+    <button class="btn-ripple" onclick="openModal('figuresModal')">Больше Биографий</button>
+</section>
+
+<section id="future">
+    <h2>Будущее Интернета</h2>
+    <p>Что ждет интернет в ближайшие годы? Эксперты предсказывают эру 5G, IoT и квантового интернета. С ростом устройств (к 2025 году ожидается 75 миллиардов IoT-устройств) интернет должен стать быстрее и безопасней. Проблемы, как кибербезопасность и дезинформация, требуют новых подходов. Витина Черфски из EFF подчеркивает важность приватности: "Будущее интернета — это баланс инноваций и защиты данных."</p>
+    <p>Возможные инновации включают: <br>
+    - Квантовые сети для мгновенной передачи.<br>
+    - AI-интегрированные сервисы для персонализированного контента.<br>
+    - Глобальные спутниковые сети, как Starlink от SpaceX, для покрытия удаленных регионов.</p>
+    <button class="btn-pulse">Экспериментируйте с Будущим</button>
+</section>
+
+<section id="statistics">
+    <h2>Статистика и Факты о Интернете</h2>
+    <ul>
+        <li>Около 5 миллиардов пользователей интернета в мире (по данным 2023).</li>
+        <li>Длина подводных кабелей — более 1 миллиона километров, соединяющих континенты.</li>
+        <li>Ежедневно генерируется 2,5 квинтиллиона байт данных.</li>
+        <li>Интернет-экономика превышает 2 трлн долларов ежегодно.</li>
+        <li>95% трафика проходит через IPv6 в некоторых регионах.</li>
+    </ul>
+    <button class="btn-bounce">Посмотреть Графики</button>
+</section>
+
+<section id="comments">
+    <h2>Оставьте Комментарий</h2>
+    <button class="btn-link" onclick="scrollToForm()">Периодически Читайте</button>
+    <form id="comment-form">
+        <input type="text" placeholder="Ваше Имя" required>
+        <textarea rows="5" placeholder="Ваш Комментарий о Истории Интернета" required></textarea>
+        <button type="submit" class="btn-primary">Отправить</button>
+    </form>
+</section>
+
+<!-- Modal for Intro -->
+<div id="introModal" class="modal-background">
+    <div class="modal">
+        <span class="modal-close" onclick="closeModal('introModal')">&times;</span>
+        <h2>Больше о Интрнете</h2>
+        <p>Интернет базируется на слоях стандартов OSI, от физического до прикладного. Современные вызовы включают сетевой нейтралитет и децентрализацию с blockchain. Изучите больше в книгах вроде "Интернет: Как Он Меняет Нашу Жизнь" автора Кевина Митника.</p>
+    </div>
+</div>
+
+<!-- Modal for Figures -->
+<div id="figuresModal" class="modal-background">
+    <div class="modal">
+        <span class="modal-close" onclick="closeModal('figuresModal')">&times;</span>
+        <h2>Дополнительные Фигуры</h2>
+        <p>Другие пионеры: Пол Барон, создатель первой поисковой системы WAIS; Джейми Завинский, сооснователь Mozilla. Эти люди сделали интернет интерактивным и демократичным.</p>
+    </div>
+</div>
+
+<script>
+window.onscroll = function() {
+    const progressBar = document.getElementById('progressBar');
+    const scrolled = (window.pageYOffset / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.transform = `scaleX(${scrolled / 100})`;
+};
+
+document.getElementById('themeToggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+    this.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+});
+
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+}
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+function openTab(evt, tabName) {
+    const tabcontent = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = 'none';
+    }
+    const tabbuttons = document.getElementsByClassName('tab-button');
+    for (let i = 0; i < tabbuttons.length; i++) {
+        tabbuttons[i].classList.remove('active');
+    }
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.classList.add('active');
+}
+
+// Ripple effect
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('btn-ripple')) {
+        const span = document.createElement('span');
+        span.className = 'ripple';
+        span.style.left = `${e.offsetX}px`;
+        span.style.top = `${e.offsetY}px`;
+        e.target.appendChild(span);
+        setTimeout(() => span.remove(), 600);
+    }
+});
+
+function scrollToForm() {
+    document.getElementById('comments').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</div>
+</body>
+</html>
+
+
+Найти еще
